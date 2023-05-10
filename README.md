@@ -1,6 +1,6 @@
 # VCD NSX-T Dynamic Security Group Terraform Module
 
-This Terraform module manages NSX-T Dynamic Security Groups in VMware Cloud Director (VCD) environments using the `vmware/vcd` provider.
+This Terraform module will deploy NSX-T Dynamic Security Groups into an existing VMware Cloud Director (VCD) Environment.  This module can be used to provsion new Dynamic Security Groups into [Rackspace Technology SDDC Flex](https://www.rackspace.com/cloud/private/software-defined-data-center-flex) VCD Data Center Regions.
 
 ## Requirements
 
