@@ -38,8 +38,8 @@ This is an example of a `main.tf` file that uses the `"github.com/global-vmware/
 module "vcd_nsxt_dynamic_security_group" {
   source            = "github.com/global-vmware/vcd_nsxt_dynamic_security_group.git?ref=v1.0.0"
 
-  vdc_org_name      = "<VDC-ORG-NAME>"
-  vdc_group_name    = "<VDC-GROUP-NAME>"
+  vdc_org_name      = "<US1-VDC-ORG-NAME>"
+  vdc_group_name    = "<US1-VDC-GRP-NAME>"
 
   dynamic_security_groups = {
     Web-Servers_Dynamic-SG = {
