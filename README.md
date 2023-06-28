@@ -1,20 +1,20 @@
 # VCD NSX-T Dynamic Security Group Terraform Module
 
-This Terraform module will deploy NSX-T Dynamic Security Groups into an existing VMware Cloud Director (VCD) Environment.  This module can be used to provsion new Dynamic Security Groups into [Rackspace Technology SDDC Flex](https://www.rackspace.com/cloud/private/software-defined-data-center-flex) VCD Data Center Regions.
+This Terraform module manages NSX-T Dynamic Security Groups in VMware Cloud Director (VCD) environments using the `vmware/vcd` provider.
 
 ## Requirements
 
 | Name      | Version |
 |-----------|---------|
 | terraform | ~> 1.2  |
-| vcd       | ~> 3.8.2 |
+| vcd       | ~> 3.8  |
 
 ## Resources
 
 | Name                                                                 | Type         |
 |----------------------------------------------------------------------|--------------|
-| [vcd_vdc_group](https://registry.terraform.io/providers/vmware/vcd/3.8.2/docs/data-sources/vdc_group) | data source |
-| [vcd_nsxt_dynamic_security_group](https://registry.terraform.io/providers/vmware/vcd/3.8.2/docs/resources/nsxt_dynamic_security_group) | resource |
+| [vcd_vdc_group](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/vdc_group) | data source |
+| [vcd_nsxt_dynamic_security_group](https://registry.terraform.io/providers/vmware/vcd/latest/docs/resources/nsxt_dynamic_security_group) | resource |
 
 ## Inputs
 
@@ -22,7 +22,7 @@ This Terraform module will deploy NSX-T Dynamic Security Groups into an existing
 |-----------------|------------------------------------------------------------------|------|---------|----------|
 | `vdc_org_name` | The name of the Data Center Group Organization in VCD | string | `"Organization Name Format: <Account_Number>-<Region>-<Account_Name>"` | yes |
 | `vdc_group_name` | The name of the Data Center Group in VCD | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name> <datacenter group>"` | yes |
-| `dynamic_security_groups` | A map of dynamic security groups to create in NSX-T. Each element of the map should contain a `description` field and a `criteria` list field, where each item in the `criteria` list should be a map containing `type`, `operator`, and `value` fields. | map(object({ description = string, criteria = list(any) })) | `{Web-Servers_Dynamic-SG = {description = "Web Servers Dynamic Security Group", criteria = [{type = "VM_TAG", operator = "EQUALS", value = "web"}]}, Database-Servers_Dynamic-SG = {description = "Database Servers Dynamic Security Group", criteria = [{type = "VM_TAG", operator = "EQUALS", value = "db"}]}}` | no |
+| `dynamic_security_groups` | A map of dynamic security groups to create in NSX-T. Each element of the map should contain a `description` field and a `criteria` list field, where each item in the `criteria` list should be a map containing `type`, `operator`, and `value` fields. | map(object({ description = string, criteria = list(any) })) | N/A | yes |
 
 ## Outputs
 
@@ -36,10 +36,10 @@ This is an example of a `main.tf` file that uses the `"github.com/global-vmware/
 
 ```terraform
 module "vcd_nsxt_dynamic_security_group" {
-  source            = "github.com/global-vmware/vcd_nsxt_dynamic_security_group.git?ref=v1.0.0"
+  source            = "github.com/global-vmware/vcd_nsxt_dynamic_security_group.git?ref=v1.1.0"
 
-  vdc_org_name      = "<US1-VDC-ORG-NAME>"
-  vdc_group_name    = "<US1-VDC-GRP-NAME>"
+  vdc_org_name      = "<VDC-ORG-NAME>"
+  vdc_group_name    = "<VDC-GROUP-NAME>"
 
   dynamic_security_groups = {
     Web-Servers_Dynamic-SG = {
