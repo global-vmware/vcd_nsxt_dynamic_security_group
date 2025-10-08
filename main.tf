@@ -28,7 +28,7 @@ resource "vcd_nsxt_dynamic_security_group" "group" {
     for_each = each.value.criteria
     content {
       dynamic "rule" {
-        for_each = [criteria.value]
+        for_each = criteria.value.rules
         content {
           type     = rule.value.type
           operator = rule.value.operator
